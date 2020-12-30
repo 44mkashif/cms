@@ -1,7 +1,7 @@
 # Campus Management System (CMS)
 
 ## About the app
-Actually, there are two separated apps. The Client which serves the FrontEnd (using React), and the Server (in Node/Express).
+Actually, there are two separate apps. The Client which serves the FrontEnd (using React), and the Server (in Node/Express).
 
 ## Quick Start
 
