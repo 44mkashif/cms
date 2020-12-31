@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const faculty = require('../models/faculty');
 
 module.exports = (faculty, update) => {
     let schema = Joi.object({

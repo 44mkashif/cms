@@ -1,7 +1,7 @@
-const Faculty = require("./../models").Faculty;
+const Faculty_Member = require("./../models").Faculty_Member;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
-const validate = require("./../validation").Faculty;
+const validate = require("./../validation").Faculty_Member;
 
 const create = (req, res) => {
     const {error} = validate(req.body, false);    
@@ -10,14 +10,14 @@ const create = (req, res) => {
             err: error.details[0].message
         });
     
-        Faculty.create({
+        Faculty_Member.create({
             ...req.body
         })
-        .then(faculty => {
+        .then(faculty_member => {
             res.status(statusCodes.CREATED).json({
                 success: true,
                 message: messages.ResourceCreated,
-                data: faculty
+                data: faculty_member
             });
         })
         .catch((err) => {
@@ -30,13 +30,13 @@ const create = (req, res) => {
 
 const retrieve = (req, res) => {
     const id = req.params.id;
-    Faculty.findOne({
+    Faculty_Member.findOne({
         where: {
-            name: id
+            id: id
         }
     })
-    .then(faculty => {
-        if(!faculty) {
+    .then(faculty_member => {
+        if(!faculty_member) {
             res.status(statusCodes.NOT_FOUND).json({
                 success:true,
                 message: messages.ResourceNotFound
@@ -44,7 +44,7 @@ const retrieve = (req, res) => {
         } else {
             res.status(statusCodes.OK).json({
                 success: true,
-                data: faculty
+                data: faculty_member
             })
         }
     })
@@ -57,10 +57,10 @@ const retrieve = (req, res) => {
 }
 
 const list = (req, res) => {
-    Faculty.findAll().then(faculties => {
+    Faculty_Member.findAll().then(faculty_members => {
         res.status(statusCodes.OK).json({
             success: true,
-            data: faculties
+            data: faculty_members
         });
     })
     .catch((err) => {
@@ -80,19 +80,19 @@ const update = async (req, res) => {
 
     const id = req.params.id;
     try {
-        const [updated] = await Faculty.update(req.body, {
-            where: { name: id }
+        const [updated] = await Faculty_Member.update(req.body, {
+            where: { id: id }
         });
         console.log(updated);
         if (updated) {
-            Faculty.findOne({
+            Faculty_Member.findOne({
                 where: req.body
             })
-            .then(faculty => {
+            .then(faculty_member => {
                 res.status(statusCodes.OK).json({
                     success: true,
                     message: messages.ResourceUpdated,
-                    data: faculty
+                    data: faculty_member
                 })
             })
             .catch((err) => {
@@ -114,19 +114,19 @@ const update = async (req, res) => {
 
 const destroy = (req, res) => {
     const id = req.params.id;
-    Faculty.findOne({
+    Faculty_Member.findOne({
         where: {
-            name: id
+            id: id
         }
     })
-    .then(faculty => {  
-        if(!faculty) {
+    .then(faculty_member => {  
+        if(!faculty_member) {
             res.status(statusCodes.NOT_FOUND).json({
                 success:true,
                 message: messages.ResourceNotFound
             })
         } else {
-            faculty.destroy()
+            faculty_member.destroy()
                 .then(() => {
                     res.status(statusCodes.OK).json({
                         success: true,
