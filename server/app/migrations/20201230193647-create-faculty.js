@@ -11,8 +11,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       dean_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       contact_phone: {
         type: Sequelize.STRING,

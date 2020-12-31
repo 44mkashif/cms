@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     course_code: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      primaryKey: true
     },
     faculty_name: {
       type: DataTypes.STRING,

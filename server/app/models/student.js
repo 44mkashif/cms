@@ -17,14 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     reg_no: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      unique: true,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     phone: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     email: {
       type: DataTypes.STRING,
@@ -49,17 +50,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     address: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     faculty_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
     gender: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     cgpa: {
-      type: Sequelize.FLOAT
+      type: DataTypes.FLOAT
     }
   }, {
     sequelize,

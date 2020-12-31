@@ -1,3 +1,3 @@
 module.exports = (app) => {
-    app.use("/api/student", require("./student"))
+    app.use("/api/faculty", require("./faculty"))
 }
