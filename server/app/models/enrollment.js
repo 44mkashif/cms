@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Course extends Model {
+  class Enrollment extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,40 +13,42 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Course.init({
-    course_code: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    faculty_name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    credit_hours: {
+  Enrollment.init({
+    reg_no: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    description: {
-      type: DataTypes.TEXT,
+    section_id: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
+    grade: {
+      type: DataTypes.STRING
+    },
+    academic_year: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    date_enrolled: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    semester: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
-    modelName: 'Course',
+    modelName: 'Enrollment',
   });
-  Course.associate = (models) => {
+  Enrollment.associate = (models) => {
     // define association here
-    Course.hasMany(models.Section, {
-      foreignKey: 'course_code'
+    Enrollment.belongsTo(models.Student, {
+      foreignKey: 'reg_no'
     });
-    Course.belongsTo(models.Faculty, {
-      foreignKey: 'faculty_name'
+    Enrollment.belongsTo(models.Section, {
+      foreignKey: 'section_id'
     });
   };
-  return Course;
+  return Enrollment;
 };

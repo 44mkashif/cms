@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Course_Students', {
+    await queryInterface.createTable('Enrollments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,19 +16,28 @@ module.exports = {
           key: 'reg_no'
         },
       },
-      course_code: {
-        type: Sequelize.STRING,
+      section_id: {
+        type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Courses',
-          key: 'course_code'
+          model: 'Sections',
+          key: 'id'
         },
       },
       grade: {
         type: Sequelize.STRING
       },
-      section: {
-        type: Sequelize.STRING
+      academic_year: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      date_enrolled: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      semester: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +50,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Course_Students');
+    await queryInterface.dropTable('Enrollments');
   }
 };

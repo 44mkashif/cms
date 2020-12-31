@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
     Student.hasMany(models.Result, {
       foreignKey: 'reg_no'
     });
-    Student.hasMany(models.Course_Student, {
+    Student.hasMany(models.Enrollment, {
       foreignKey: 'reg_no'
     });
   };

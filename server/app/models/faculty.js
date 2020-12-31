@@ -25,7 +25,18 @@ module.exports = (sequelize, DataTypes) => {
     dean_id: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    contact_phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    contact_email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      }
+    },
   }, {
     sequelize,
     modelName: 'Faculty',
@@ -44,10 +55,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'faculty_name',
       as: 'faculty_members'
     });
-    // Faculty.hasOne(models.Faculty_Member, {
-    //   foreignKey: 'dean_id',
-    //   as: 'dean'
-    // })
   };
   return Faculty;
 };

@@ -16,12 +16,12 @@ module.exports = {
           key: 'reg_no'
         },
       },
-      course_code: {
-        type: Sequelize.STRING,
+      section_id: {
+        type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Courses',
-          key: 'course_code'
+          model: 'Sections',
+          key: 'id'
         },
       },
       lecture_no: {

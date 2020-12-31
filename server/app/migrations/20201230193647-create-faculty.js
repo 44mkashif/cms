@@ -14,6 +14,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      contact_phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      contact_email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
