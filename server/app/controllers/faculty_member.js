@@ -1,15 +1,18 @@
+const _ = require("lodash");
 const Faculty_Member = require("./../models").Faculty_Member;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Faculty_Member;
+const { hashPassword } = require("./../functions/helpers");
 
-const create = (req, res) => {
+const create = async (req, res) => {
     const {error} = validate(req.body, false);    
         if (error) return res.status(statusCodes.BAD_REQUEST).json({
             success: false,
             err: error.details[0].message
         });
-    
+        
+        req.body.password = await hashPassword(req.body.password);
         Faculty_Member.create({
             ...req.body
         })
@@ -17,7 +20,7 @@ const create = (req, res) => {
             res.status(statusCodes.CREATED).json({
                 success: true,
                 message: messages.ResourceCreated,
-                data: faculty_member
+                data: _.pick(faculty_member, ["id", "faculty_name", "name", "phone", "email", "dob", "address", "designation"])
             });
         })
         .catch((err) => {

@@ -9,9 +9,13 @@ const create = (req, res) => {
             success: false,
             err: error.details[0].message
         });
+
+        var date = new Date();
+        date = date.toISOString().slice(0,10);
     
         Enrollment.create({
-            ...req.body
+            ...req.body,
+            date_enrolled: date
         })
         .then(enrollment => {
             res.status(statusCodes.CREATED).json({

@@ -1,15 +1,18 @@
+const _ = require("lodash");
 const Student = require("./../models").Student;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Student;
+const { hashPassword } = require("./../functions/helpers");
 
-const create = (req, res) => {
+const create = async (req, res) => {
     const {error} = validate(req.body, false);    
         if (error) return res.status(statusCodes.BAD_REQUEST).json({
             success: false,
             err: error.details[0].message
         });
     
+        req.body.password = await hashPassword(req.body.password);
         Student.create({
             ...req.body
         })
@@ -17,7 +20,7 @@ const create = (req, res) => {
             res.status(statusCodes.CREATED).json({
                 success: true,
                 message: messages.ResourceCreated,
-                data: student
+                data: _.pick(student, ["reg_no", "name", "phone", "email", "dob", "batch", "address", "faculty_name", "gender", "cgpa"])
             });
         })
         .catch((err) => {
@@ -80,7 +83,7 @@ const update = async (req, res) => {
 
     const id = req.params.id;
     try {
-        const [updated] = await Course.update(req.body, {
+        const [updated] = await Student.update(req.body, {
             where: { reg_no: id }
         });
         console.log(updated);
