@@ -4,5 +4,7 @@ module.exports = (app) => {
     app.use("/api/course", require("./course")),
     app.use("/api/student", require("./student")),
     app.use("/api/enrollment", require("./enrollment")),
-    app.use("/api/section", require("./section"))
+    app.use("/api/section", require("./section")),
+    app.use("/api/result", require("./result")),
+    app.use("/api/attendance", require("./attendance"))
 }

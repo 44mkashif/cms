@@ -33,7 +33,7 @@ const retrieve = (req, res) => {
     const id = req.params.id;
     Result.findOne({
         where: {
-            reg_no: id
+            id: id
         }
     })
     .then(result => {
@@ -82,12 +82,12 @@ const update = async (req, res) => {
     const id = req.params.id;
     try {
         const [updated] = await Result.update(req.body, {
-            where: { reg_no: id }
+            where: { id: id }
         });
         console.log(updated);
         if (updated) {
             Result.findOne({
-                where: req.body
+                where: { id: id }
             })
             .then(result => {
                 res.status(statusCodes.OK).json({
@@ -117,7 +117,7 @@ const destroy = (req, res) => {
     const id = req.params.id;
     Result.findOne({
         where: {
-            course_code: id
+            id: id
         }
     })
     .then(result => {  

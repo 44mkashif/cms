@@ -32,7 +32,7 @@ const retrieve = (req, res) => {
     const id = req.params.id;
     Attendance.findOne({
         where: {
-            name: id
+            id: id
         }
     })
     .then(attendance => {
@@ -57,10 +57,10 @@ const retrieve = (req, res) => {
 }
 
 const list = (req, res) => {
-    Attendance.findAll().then(faculties => {
+    Attendance.findAll().then(attendances => {
         res.status(statusCodes.OK).json({
             success: true,
-            data: attendance
+            data: attendances
         });
     })
     .catch((err) => {
@@ -81,12 +81,12 @@ const update = async (req, res) => {
     const id = req.params.id;
     try {
         const [updated] = await Attendance.update(req.body, {
-            where: { name: id }
+            where: { id: id }
         });
         console.log(updated);
         if (updated) {
             Attendance.findOne({
-                where: req.body
+                where: { id: id }
             })
             .then(attendance => {
                 res.status(statusCodes.OK).json({
@@ -116,7 +116,7 @@ const destroy = (req, res) => {
     const id = req.params.id;
     Attendance.findOne({
         where: {
-            name: id
+            id: id
         }
     })
     .then(attendance => {  

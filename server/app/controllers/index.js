@@ -4,6 +4,8 @@ const Course = require("./course");
 const Student = require("./student");
 const Enrollment = require("./enrollement");
 const Section = require("./section");
+const Result = require("./result");
+const Attendance = require("./attendance");
 
 module.exports = {
     Faculty,
@@ -11,5 +13,7 @@ module.exports = {
     Course,
     Student,
     Enrollment,
-    Section
+    Section,
+    Result,
+    Attendance
 }
