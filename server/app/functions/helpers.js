@@ -11,11 +11,19 @@ const passwordValidity =  async (passwordEntered, validPassword) => {
     return await bcrypt.compare(passwordEntered, validPassword);
 }
 
-const generateToken = (admin) => {
+const generateToken = (user, role) => {
+    if(role == "student"){
+        return jwt.sign({ 
+            reg_no: user.reg_no,
+            email: user.email,
+            role: role
+        }, 'jwtPrivateKey');
+    }
     return jwt.sign({ 
-        id: admin.id, 
-        email: admin.email 
-    }, 'jwtPrivateKey')
+        id: user.id, 
+        email: user.email,
+        role: role
+    }, 'jwtPrivateKey');
 }
 
 module.exports = {

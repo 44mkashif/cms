@@ -177,7 +177,7 @@ const login = (req,res) => {
                 });
             }
             else {
-                const token =  generateToken(admin);
+                const token =  generateToken(admin, "admin");
                 res.header('x-auth-token', token).status(statusCodes.OK).json({
                     success: true, 
                     data: _.pick(admin, ["id", "email"])
@@ -194,7 +194,7 @@ const login = (req,res) => {
 }
 
 const getAdminFromAuth = (req,res) => {
-    const admin = req.admin;
+    const admin = req.user;
     console.log(admin.id);
     Admin
     .findByPk(admin.id)

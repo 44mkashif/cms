@@ -3,10 +3,10 @@ const Faculty_Member = require("./../models").Faculty_Member;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Faculty_Member;
-const { hashPassword } = require("./../functions/helpers");
+const { hashPassword, passwordValidity, generateToken } = require("./../functions/helpers");
 
 const create = async (req, res) => {
-    const {error} = validate(req.body, false);    
+    const {error} = validate(req.body, false, false);    
         if (error) return res.status(statusCodes.BAD_REQUEST).json({
             success: false,
             err: error.details[0].message
@@ -75,7 +75,7 @@ const list = (req, res) => {
 }
 
 const update = async (req, res) => {
-    const {error} = validate(req.body, true);    
+    const {error} = validate(req.body, true, false);    
     if (error) return res.status(statusCodes.BAD_REQUEST).json({
         success: false,
         err: error.details[0].message
@@ -152,10 +152,72 @@ const destroy = (req, res) => {
     })
 }
 
+const login = (req,res) => {
+    const {error} = validate(req.body, false, true);
+    if(error) return res.status(statusCodes.BAD_REQUEST).json({success: false, err: error.details[0].message});
+
+    Faculty_Member
+    .findOne({
+        where: {email: req.body.email}
+    })
+    .then( async faculty_member => {
+        console.log(faculty_member);
+        if(!faculty_member) {
+            res.status(statusCodes.NOT_FOUND).json({
+                success: false, 
+                message: messages.invalidEmail
+            });
+        }
+        else {
+            const validPassword = await passwordValidity(req.body.password,faculty_member.password);
+            if(!validPassword) {
+                res.status(statusCodes.UNAUTHORIZED).json({
+                    success: false, 
+                    message: messages.loginFailed
+                });
+            }
+            else {
+                const token =  generateToken(faculty_member, "faculty_member");
+                res.header('x-auth-token', token).status(statusCodes.OK).json({
+                    success: true, 
+                    data: _.pick(faculty_member, ["id", "faculty_name", "name", "phone", "email", "dob", "address", "designation"])
+                });
+            }
+        }
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({
+            success: false, 
+            err: err
+        });
+    });
+}
+
+const getFacultyMemberFromAuth = (req,res) => {
+    const faculty_member = req.user;
+    console.log(faculty_member.id);
+    Faculty_Member
+    .findByPk(faculty_member.id)
+    .then(faculty_member => {
+        res.status(statusCodes.OK).json({
+            success: true, 
+            data: faculty_member
+        });
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({
+            success: false, 
+            err: err
+        });
+    });
+}
+
 module.exports = {
     create,
     retrieve,
     list,
     update,
-    destroy
+    destroy,
+    login,
+    getFacultyMemberFromAuth
 }

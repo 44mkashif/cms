@@ -5,7 +5,7 @@ const { adminAuth } = require("./../middlewares/auth");
 
 Router.get("/", AdminController.list);
 Router.get("/:id", AdminController.retrieve);
-Router.post("/", AdminController.create);
+Router.post("/", adminAuth, AdminController.create);
 Router.put("/:id", adminAuth, AdminController.update);
 Router.delete("/:id", adminAuth, AdminController.destroy);
 

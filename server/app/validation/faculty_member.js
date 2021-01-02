@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-module.exports = (faculty_member, update) => {
+module.exports = (faculty_member, update, login) => {
     let schema = Joi.object({
         faculty_name: Joi.string().min(3).max(50).required(),
         name: Joi.string().min(3).max(30).required(),
@@ -22,6 +22,11 @@ module.exports = (faculty_member, update) => {
             dob: Joi.date().less('now'),
             address: Joi.string().min(3).max(255),
             designation: Joi.string().min(2).max(45)
+        });
+    } else if (login) {
+        schema = Joi.object({
+            email: Joi.string().min(5).max(50).required().email(),
+            password: Joi.string().min(5).max(255).required()
         });
     }
 

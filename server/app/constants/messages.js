@@ -6,5 +6,6 @@ module.exports = {
     invalidEmail: "User with the input email doesnot exist.",
     loginFailed: "Email or password incorrect.",
     NoAuthToken: "Access denied. No auth token provided.",
-    InvalidAuthToken: "Invalid Auth Token."
+    InvalidAuthToken: "Invalid Auth Token.",
+    UnauthorizedToken: "Access denied. You don't have permission to perform this task."
 }
