@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
   Course.associate = (models) => {
     // define association here
     Course.hasMany(models.Section, {
-      foreignKey: 'course_code'
+      foreignKey: 'course_code',
+      as: 'sections'
     });
     Course.belongsTo(models.Faculty, {
       foreignKey: 'faculty_name'

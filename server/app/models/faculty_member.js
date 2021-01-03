@@ -61,7 +61,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'faculty_name'
     });
     Faculty_Member.hasMany(models.Section, {
-      foreignKey: 'faculty_member_id'
+      foreignKey: 'faculty_member_id',
+      as: 'sections'
     });
   };
   return Faculty_Member;

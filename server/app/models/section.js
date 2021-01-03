@@ -40,10 +40,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'faculty_member_id'
     });
     Section.hasMany(models.Attendance, {
-      foreignKey: 'section_id'
+      foreignKey: 'section_id',
+      as: 'attendances'
     });
     Section.hasMany(models.Enrollment, {
-      foreignKey: 'section_id'
+      foreignKey: 'section_id',
+      as: 'enrollments'
     });
   };
   return Section;

@@ -43,7 +43,7 @@ function App() {
                 Campus Management System
               </Typography>
             </Grid>
-            <Grid container justify="center">
+            <Grid container justify="center" >
               <Button
                 variant="contained"
                 color="primary"

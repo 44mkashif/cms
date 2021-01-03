@@ -1,5 +1,8 @@
 const _ = require("lodash");
 const Student = require("./../models").Student;
+const Result = require("./../models").Result;
+const Attendance = require("./../models").Attendance;
+const Enrollment = require("./../models").Enrollment;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Student;
@@ -211,6 +214,59 @@ const getStudentFromAuth = (req,res) => {
     });
 }
 
+const retrieveStudentResults = (req,res) => {
+    const reg_no = req.params.reg_no;  
+    // console.log(`Id = ${id}`);  
+    Student
+    .findByPk(reg_no,{
+        include: [{
+            model: Result,
+            as: "results"
+        }]
+    })
+    .then(results => {
+        res.status(statusCodes.OK).json({success: true, data: results});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
+const retrieveStudentAttendances = (req,res) => {
+    const reg_no = req.params.reg_no;  
+    // console.log(`Id = ${id}`);  
+    Student
+    .findByPk(reg_no,{
+        include: [{
+            model: Attendance,
+            as: "attendances"
+        }]
+    })
+    .then(attendances => {
+        res.status(statusCodes.OK).json({success: true, data: attendances});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
+const retrieveStudentEnrollments = (req,res) => {
+    const reg_no = req.params.reg_no;  
+    // console.log(`Id = ${id}`);  
+    Student
+    .findByPk(reg_no,{
+        include: [{
+            model: Enrollment,
+            as: "enrollments"
+        }]
+    })
+    .then(enrollments => {
+        res.status(statusCodes.OK).json({success: true, data: enrollments});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
 module.exports = {
     create,
     retrieve,
@@ -218,5 +274,8 @@ module.exports = {
     update,
     destroy,
     login,
-    getStudentFromAuth
+    getStudentFromAuth,
+    retrieveStudentResults,
+    retrieveStudentAttendances,
+    retrieveStudentEnrollments
 }

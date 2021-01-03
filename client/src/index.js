@@ -5,6 +5,7 @@ import App from './App';
 import StudentLogin from './pages/student/Login';
 import StudentDashboard from './pages/student/Dashboard';
 import FacultyMemberLogin from './pages/faculty_member/Login';
+import AdminLogin from './pages/admin/Login';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ ReactDOM.render(
         <Route exact path="/"><App/></Route>
         <Route exact path="/student/login"><StudentLogin/></Route>
         <Route exact path="/faculty_member/login"><FacultyMemberLogin/></Route>
+        <Route exact path="/admin/login"><AdminLogin/></Route>
         <Route exact path="/student/dashboard"><StudentDashboard/></Route>
       </Switch>
   </BrowserRouter>, 

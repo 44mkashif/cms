@@ -1,4 +1,6 @@
 const Section = require("./../models").Section;
+const Enrollment = require("./../models").Enrollment;
+const Attendance = require("./../models").Attendance;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Section;
@@ -149,10 +151,47 @@ const destroy = (req, res) => {
     })
 }
 
+const retrieveSectionEnrollments = (req,res) => {
+    const id = req.params.sectionId;  
+    // console.log(`Id = ${id}`);  
+    Section
+    .findByPk(id,{
+        include: [{
+            model: Enrollment,
+            as: "enrollments"
+        }]
+    })
+    .then(enrollments => {
+        res.status(statusCodes.OK).json({success: true, data: enrollments});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
+const retrieveSectionAttendances = (req,res) => {
+    const id = req.params.sectionId;  
+    // console.log(`Id = ${id}`);  
+    Section
+    .findByPk(id,{
+        include: [{
+            model: Attendance,
+            as: "attendances"
+        }]
+    })
+    .then(attendances => {
+        res.status(statusCodes.OK).json({success: true, data: attendances});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
 module.exports = {
     create,
     retrieve,
     list,
     update,
-    destroy
+    destroy,
+    retrieveSectionEnrollments,
+    retrieveSectionAttendances
 }
