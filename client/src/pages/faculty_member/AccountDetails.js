@@ -83,10 +83,6 @@ export default function AccountDetails() {
                       <StyledTableCell align="left">Address: {faculty_member.address}</StyledTableCell>
                       <StyledTableCell align="left">Date of Birth: {faculty_member.dob.substring(0,10)}</StyledTableCell>
                     </StyledTableRow >
-                    <StyledTableRow  key={5}>
-                      <StyledTableCell align="left">Gender: {faculty_member.gender == 'M' ? 'Male' : 'Female'}</StyledTableCell>
-                      <StyledTableCell align="left"></StyledTableCell>
-                    </StyledTableRow >
                 </TableBody>
             </Table>
             <br></br>
