@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const Faculty_Member = require("./../models").Faculty_Member;
 const Section = require("./../models").Section;
+const Course = require("./../models").Course;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Faculty_Member;
@@ -233,6 +234,28 @@ const retrieveFacultyMemberSections = (req,res) => {
     });  
 }
 
+const retrieveFacultyMemberCourses = (req,res) => {
+    const id = req.params.facultyMemberId;  
+    // console.log(`Id = ${id}`);  
+    Faculty_Member
+    .findByPk(id, {
+        include: [{
+            model: Section,
+            as: 'sections',
+            include: [{
+                model: Course,
+                as: 'course'
+            }]
+        }]
+    })
+    .then(faculty_members => {
+        res.status(statusCodes.OK).json({success: true, data: faculty_members});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
 module.exports = {
     create,
     retrieve,
@@ -241,5 +264,6 @@ module.exports = {
     destroy,
     login,
     getFacultyMemberFromAuth,
-    retrieveFacultyMemberSections
+    retrieveFacultyMemberSections,
+    retrieveFacultyMemberCourses
 }

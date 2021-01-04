@@ -8,9 +8,12 @@ import StudentDashboard from './pages/student/Dashboard';
 import StudentCourses from './pages/student/Courses';
 import StudentCourseRegistration from './pages/student/CourseRegistration';
 import StudentResult from './pages/student/Result';
+import StudentAccount from './pages/student/Account';
 
 import FacultyMemberLogin from './pages/faculty_member/Login';
 import FacultyMemberDashboard from './pages/faculty_member/Dashboard';
+import FacultyMemberAccount from './pages/faculty_member/Account';
+import FacultyMemberCourses from './pages/faculty_member/Courses';
 
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
@@ -53,6 +56,9 @@ ReactDOM.render(
         <Route exact path="/student/result">
           {studentLoggedIn ? <StudentResult/> : <Redirect to="/student/login" />}
         </Route>
+        <Route exact path="/student/account">
+          {studentLoggedIn ? <StudentAccount/> : <Redirect to="/student/login" />}
+        </Route>
 
         {/* Faculty Member routes */}
         <Route exact path="/faculty_member/login">
@@ -60,6 +66,12 @@ ReactDOM.render(
         </Route>
         <Route exact path="/faculty_member/dashboard">
           {facultyMemberLoggedIn ? <FacultyMemberDashboard/> : <Redirect to="/faculty_member/login" />}
+        </Route>
+        <Route exact path="/faculty_member/courses">
+          {facultyMemberLoggedIn ? <FacultyMemberCourses/> : <Redirect to="/faculty_member/login" />}
+        </Route>
+        <Route exact path="/faculty_member/account">
+          {facultyMemberLoggedIn ? <FacultyMemberAccount/> : <Redirect to="/faculty_member/login" />}
         </Route>
 
         {/* Admin Routes */}

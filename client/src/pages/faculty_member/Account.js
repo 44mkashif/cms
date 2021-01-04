@@ -17,9 +17,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './listItems';
-import ResultCards from './ResultCards';
+import AccountDetails from './AccountDetails';
 import Logout from '../Logout';
-
 
 function Copyright() {
   return (
@@ -111,11 +110,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 40,
   },
 }));
 
-export default function Result() {
+export default function Account() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -141,7 +140,7 @@ export default function Result() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Result
+            Account
           </Typography>
           <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
@@ -169,8 +168,9 @@ export default function Result() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
             <Grid item xs={12}>
-              <ResultCards />
+              <AccountDetails />
             </Grid>
+            <Box className={classes.fixedHeight}></Box>
           <Box pt={4}>
             <Copyright />
           </Box>

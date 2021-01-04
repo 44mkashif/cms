@@ -10,10 +10,10 @@ import Axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
-const reg_no = localStorage.getItem('reg-no');
+const faculty_id = localStorage.getItem('id');
 var sections = [];
 var courses = [];
-var faculty_members = [];
+var faculty_member;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,56 +51,25 @@ export default function CourseList() {
   const [isSelected, setIsSelected] = useState(false);
   const [courseSelected, setCourseSelected] = useState("");
 
-  const retrieveFacultyMembers = (faculty_member_id) => {
-    return new Promise((resolve, reject) => {
-      Axios.get(`http://localhost:4000/api/faculty-member/${faculty_member_id}`, {})
-      .then((response) => {
-        if(response.status == 200){
-          faculty_members.push(response.data.data);
-          console.log(faculty_members);
-        }
-      })
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
-    });
-  }
-
   const retrieveCourses = () => {
     sections = [];
     courses = [];
-    faculty_members = [];
+    faculty_member = null;
   
-    Axios.get(`http://localhost:4000/api/student/${reg_no}/courses`, {})
+    Axios.get(`http://localhost:4000/api/faculty-member/${faculty_id}/courses`, {})
     .then((response) => {
       if(response.status == 200) {
-        const student = response.data.data;
+        faculty_member = response.data.data;
+        console.log(faculty_member);
         
-        const enrollments = student.enrollments;
-  
-        enrollments.forEach(enrollment => {
-          sections.push(enrollment.section);
-        });
+        sections = faculty_member.sections;
+        console.log(sections);
 
-        var facultyMemberIds = [];
         sections.forEach(section => {
           courses.push(section.course);
-          facultyMemberIds.push(section.faculty_member_id);
         });
-
-        let requests = [];
-        facultyMemberIds.forEach(facultyMemberId => {
-          requests.push(retrieveFacultyMembers(facultyMemberId));
-        });
-        console.log(sections);
         console.log(courses);
-        
-        Promise.all(requests).then(() => {
-          setLoading(false);
-        })
+        setLoading(false);
       }
     }).catch((e) => {
       console.log(e);
@@ -137,7 +106,6 @@ export default function CourseList() {
               <StyledTableCell align="center">Course Title</StyledTableCell>
               <StyledTableCell align="center">Section</StyledTableCell>
               <StyledTableCell align="center">Credit Hours</StyledTableCell>
-              <StyledTableCell align="center">Faculty</StyledTableCell>
             </TableRow>
           </TableHead>
           {loading ? <div>Loading...</div>
@@ -150,9 +118,6 @@ export default function CourseList() {
                   <StyledTableCell align="center">{course.name}</StyledTableCell>
                   <StyledTableCell align="center">{sections[index].name}</StyledTableCell>
                   <StyledTableCell align="center">{course.credit_hours}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    {faculty_members[index].name}
-                  </StyledTableCell>
                 </StyledTableRow >
               ))}
             </TableBody>

@@ -18,9 +18,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './listItems';
-// import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import CourseList from './CourseList';
+import AccountDetails from './AccountDetails';
+import Logout from './../Logout';
 
 function Copyright() {
   return (
@@ -144,7 +144,7 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
           </IconButton>
         </Toolbar>
@@ -170,23 +170,11 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                {/* <Chart /> */}
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
+              <AccountDetails />
+            </Grid>
+            <Grid item xs={12}>
+              <CourseList />
             </Grid>
           </Grid>
           <Box pt={4}>

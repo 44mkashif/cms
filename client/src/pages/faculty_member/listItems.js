@@ -16,31 +16,31 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/student/dashboard">
+    <ListItem button component={Link} to="/faculty_member/dashboard">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    {/* <ListItem button component={Link} to="/student/course_registration">
+    {/* <ListItem button component={Link} to="/faculty_member/course_registration">
       <ListItemIcon>
         <PostAddIcon />
       </ListItemIcon>
       <ListItemText primary="Course Registration" />
     </ListItem> */}
-    <ListItem button component={Link} to="/student/courses">
+    <ListItem button component={Link} to="/faculty_member/courses">
       <ListItemIcon>
         <LibraryBooksIcon />
       </ListItemIcon>
       <ListItemText primary="Courses" />
     </ListItem>
-    <ListItem button component={Link} to="/student/result">
+    {/* <ListItem button component={Link} to="/faculty_member/result">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Result" />
-    </ListItem>
-    <ListItem button component={Link} to="/student/account">
+    </ListItem> */}
+    <ListItem button component={Link} to="/faculty_member/account">
       <ListItemIcon>
         <AccountCircleIcon />
       </ListItemIcon>

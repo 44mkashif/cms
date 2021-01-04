@@ -6,7 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Axios from 'axios';
 
@@ -27,6 +27,24 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
 }));
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.primary.dark,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+root: {
+    '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+    },
+},
+}))(TableRow);
 
 export default function ResultCards() {
     const classes = useStyles();
@@ -114,22 +132,22 @@ export default function ResultCards() {
                     <Table size="small">
                         <TableHead>
                         <TableRow>
-                            <TableCell align="center">Course Code</TableCell>
-                            <TableCell align="center">Course Title</TableCell>
-                            <TableCell align="center">Credit Hours</TableCell>
-                            <TableCell align="center">Grade</TableCell>
+                            <StyledTableCell align="center">Course Code</StyledTableCell>
+                            <StyledTableCell align="center">Course Title</StyledTableCell>
+                            <StyledTableCell align="center">Credit Hours</StyledTableCell>
+                            <StyledTableCell align="center">Grade</StyledTableCell>
                         </TableRow>
                         </TableHead>
                         {loading ? <div>Loading...</div>
                         :
                         <TableBody>
                             {enrollments.map((enrollment, index) => (
-                                <TableRow key={1}>
-                                    <TableCell align="center">{courses[index].course_code}</TableCell>
-                                    <TableCell align="center">{courses[index].name}</TableCell>
-                                    <TableCell align="center">{courses[index].credit_hours}</TableCell>
-                                    <TableCell align="center">{enrollment.grade}</TableCell>
-                                </TableRow>
+                                <StyledTableRow key={1}>
+                                    <StyledTableCell align="center">{courses[index].course_code}</StyledTableCell>
+                                    <StyledTableCell align="center">{courses[index].name}</StyledTableCell>
+                                    <StyledTableCell align="center">{courses[index].credit_hours}</StyledTableCell>
+                                    <StyledTableCell align="center">{enrollment.grade}</StyledTableCell>
+                                </StyledTableRow>
                             ))}
                         </TableBody>
                         }
