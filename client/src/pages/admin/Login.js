@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import bgImage from './../../assets/adminLogin.jpg';
 
 function Copyright() {
   return (
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://www.bird-wittenbergdental.com/wp-content/uploads/2017/01/top-line-management-login-background-1.jpg)',
+    backgroundImage: `url(${bgImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -58,13 +60,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const login = () => {
+    setErrorMessage(null);
+    setSuccessMessage(null);
     Axios.post('http://localhost:4000/api/admin/login', {
       email: email,
       password: password
@@ -75,9 +80,17 @@ export default function Login() {
         localStorage.setItem('x-auth-token', authToken);
         localStorage.setItem('id', admin.id);
         localStorage.setItem('email', admin.email);
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('user', 'admin');
+        setSuccessMessage("Log In Successful");
+        window.location.href="/admin/dashboard";
       }
     }).catch((e) => {
-      console.log(e);
+      if (e.response && e.response.data) {
+        const errorMessage = e.response.data.err || e.response.data.message;
+        console.log(errorMessage);
+        setErrorMessage(errorMessage);
+      }
     })
   }
 
@@ -144,9 +157,18 @@ export default function Login() {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <div>{error}</div>
-            </Box>
+            {errorMessage &&
+              <Box mt={5}>
+                <Alert severity="error">
+                  <AlertTitle>Error</AlertTitle>{errorMessage}</Alert>
+              </Box>
+            }
+            {successMessage &&
+              <Box mt={5}>
+                <Alert severity="success">
+                  <AlertTitle>Success</AlertTitle>{successMessage}</Alert>
+              </Box>
+            }
             <Box mt={5}>
               <Copyright />
             </Box>

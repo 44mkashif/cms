@@ -4,12 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import bgImage from './assets/cover.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-    backgroundImage: 'url(https://www.bird-wittenbergdental.com/wp-content/uploads/2017/01/top-line-management-login-background-1.jpg)',
+    backgroundImage: `url(${bgImage})`,
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -59,6 +60,14 @@ function App() {
                 component={Link} to="/faculty_member/login"
               >
                 Instructor Portal
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                component={Link} to="/admin/login"
+              >
+                Admin Portal
               </Button>
             </Grid>
           </div>

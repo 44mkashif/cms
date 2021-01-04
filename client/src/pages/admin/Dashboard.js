@@ -10,29 +10,30 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { mainListItems, secondaryListItems } from './listItems';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+// import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+// import Deposits from './Deposits';
+// import Orders from './Orders';
 
 function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Campus Management System
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="#">
+          Campus Management System
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
 }
 
 const drawerWidth = 240;
@@ -145,7 +146,9 @@ export default function Dashboard() {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <ExitToAppIcon />
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -162,9 +165,9 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        {/* <List>{mainListItems}</List> */}
         <Divider />
-        <List>{secondaryListItems}</List>
+        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -179,13 +182,13 @@ export default function Dashboard() {
             {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+                {/* <Deposits /> */}
               </Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                {/* <Orders /> */}
               </Paper>
             </Grid>
           </Grid>

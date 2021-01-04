@@ -3,6 +3,7 @@ const StudentController = require("./../controllers").Student;
 const ResultController = require("./../controllers").Result;
 const AttendanceController = require("./../controllers").Attendance;
 const EnrollmentController = require("./../controllers").Enrollment;
+const CourseController = require("./../controllers").Course;
 const { methodNotAllowed } = require("./../functions/requests");
 const { adminAuth, studentAuth } = require("./../middlewares/auth");
 
@@ -28,10 +29,13 @@ Router.put("/:reg_no/attendances/:id", AttendanceController.update);
 Router.delete("/:reg_no/attendances/:id", AttendanceController.destroy);
 
 Router.get("/:reg_no/enrollments/", StudentController.retrieveStudentEnrollments);
+Router.get("/:reg_no/enrollments/:semester", StudentController.retrieveStudentSemesterEnrollments);
 Router.get("/:reg_no/enrollments/:id", EnrollmentController.retrieve);
 Router.post("/:reg_no/enrollments/", EnrollmentController.create);
 Router.put("/:reg_no/enrollments/:id", EnrollmentController.update);
 Router.delete("/:reg_no/enrollments/:id", EnrollmentController.destroy);
+
+Router.get("/:reg_no/courses/", StudentController.retrieveStudentCourses);
 
 Router.all('/', methodNotAllowed);
 Router.all('/:id', methodNotAllowed);

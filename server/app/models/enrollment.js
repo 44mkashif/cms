@@ -47,7 +47,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'reg_no'
     });
     Enrollment.belongsTo(models.Section, {
-      foreignKey: 'section_id'
+      foreignKey: 'section_id',
+      as: 'section'
     });
   };
   return Enrollment;

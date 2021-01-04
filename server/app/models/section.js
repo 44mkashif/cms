@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
     Section.belongsTo(models.Faculty_Member, {
       foreignKey: 'faculty_member_id'
     });
+    Section.belongsTo(models.Course, {
+      foreignKey: 'course_code',
+      as: 'course'
+    });
     Section.hasMany(models.Attendance, {
       foreignKey: 'section_id',
       as: 'attendances'

@@ -1,4 +1,6 @@
 const Enrollment = require("./../models").Enrollment;
+const Section = require("./../models").Section;
+const Course = require("./../models").Course;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Enrollment;
@@ -153,10 +155,33 @@ const destroy = (req, res) => {
     })
 }
 
+const retrieveEnrollmentCourse = (req,res) => {
+    const eId = req.params.eId;  
+    // console.log(`Id = ${id}`);  
+    Enrollment
+    .findByPk(eId, {
+        include: [{
+            model: Section,
+            as: 'section',
+            include: [{
+                model: Course,
+                as: 'course'
+            }]
+        }]
+    })
+    .then(courses => {
+        res.status(statusCodes.OK).json({success: true, data: courses});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
 module.exports = {
     create,
     retrieve,
     list,
     update,
-    destroy
+    destroy,
+    retrieveEnrollmentCourse
 }

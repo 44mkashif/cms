@@ -60,7 +60,9 @@ const retrieve = (req, res) => {
 }
 
 const list = (req, res) => {
-    Admin.findAll().then(admins => {
+    Admin.findAll({
+        attributes: { exclude: ['password'] }
+    }).then(admins => {
         res.status(statusCodes.OK).json({
             success: true,
             data: admins

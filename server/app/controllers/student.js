@@ -3,6 +3,8 @@ const Student = require("./../models").Student;
 const Result = require("./../models").Result;
 const Attendance = require("./../models").Attendance;
 const Enrollment = require("./../models").Enrollment;
+const Section = require("./../models").Section;
+const Course = require("./../models").Course;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Student;
@@ -63,7 +65,9 @@ const retrieve = (req, res) => {
 }
 
 const list = (req, res) => {
-    Student.findAll().then(students => {
+    Student.findAll({
+        attributes: { exclude: ['password'] }
+    }).then(students => {
         res.status(statusCodes.OK).json({
             success: true,
             data: students
@@ -267,6 +271,55 @@ const retrieveStudentEnrollments = (req,res) => {
         res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
     });  
 }
+
+const retrieveStudentSemesterEnrollments = (req,res) => {
+    const reg_no = req.params.reg_no;
+    const semester = req.params.semester;
+    // console.log(`Id = ${id}`);  
+    Student
+    .findByPk(reg_no,{
+        include: [{
+            model: Enrollment,
+            as: "enrollments",
+            where: {
+                semester: semester
+            }
+        }]
+    })
+    .then(enrollments => {
+        res.status(statusCodes.OK).json({success: true, data: enrollments});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
+const retrieveStudentCourses = (req,res) => {
+    const reg_no = req.params.reg_no;  
+    // console.log(`Id = ${id}`);  
+    Student
+    .findByPk(reg_no, {
+        include: [{
+            model: Enrollment,
+            as: 'enrollments',
+            include: [{
+                model: Section,
+                as: 'section',
+                include: [{
+                    model: Course,
+                    as: 'course'
+                }]
+            }]
+        }]
+    })
+    .then(courses => {
+        res.status(statusCodes.OK).json({success: true, data: courses});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
 module.exports = {
     create,
     retrieve,
@@ -277,5 +330,7 @@ module.exports = {
     getStudentFromAuth,
     retrieveStudentResults,
     retrieveStudentAttendances,
-    retrieveStudentEnrollments
+    retrieveStudentEnrollments,
+    retrieveStudentSemesterEnrollments,
+    retrieveStudentCourses
 }

@@ -9,6 +9,8 @@ Router.post("/", studentAuth, EnrollmentController.create);
 Router.put("/:id", studentAuth, EnrollmentController.update);
 Router.delete("/:id", studentAuth, EnrollmentController.destroy);
 
+Router.get("/:eId/course/", EnrollmentController.retrieveEnrollmentCourse);
+
 Router.all('/', methodNotAllowed);
 Router.all('/:id', methodNotAllowed);
 

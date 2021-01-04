@@ -48,7 +48,7 @@ const retrieve = (req, res) => {
         } else {
             res.status(statusCodes.OK).json({
                 success: true,
-                data: faculty_member
+                data: _.pick(faculty_member, ["id", "faculty_name", "name", "phone", "email", "dob", "address", "designation"])
             })
         }
     })
@@ -61,7 +61,9 @@ const retrieve = (req, res) => {
 }
 
 const list = (req, res) => {
-    Faculty_Member.findAll().then(faculty_members => {
+    Faculty_Member.findAll({
+        attributes: { exclude: ['password'] }
+    }).then(faculty_members => {
         res.status(statusCodes.OK).json({
             success: true,
             data: faculty_members
