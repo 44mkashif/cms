@@ -10,7 +10,7 @@ module.exports = {
       },
       faculty_name: {
         type: Sequelize.STRING,
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
         references: {
           model: 'Faculties',
           key: 'name',
