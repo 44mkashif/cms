@@ -238,7 +238,6 @@ const retrieveFacultyDean = (req,res) => {
         nest: true
     })
     .then(facultyWithDean => {
-        console.log(facultyWithDean);
         if(facultyWithDean.length == 0) {
             res.status(statusCodes.NOT_FOUND).json({
                 success:true,
