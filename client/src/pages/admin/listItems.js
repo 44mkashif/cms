@@ -16,23 +16,23 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/faculty_member/dashboard">
+    <ListItem button component={Link} to="/admin/dashboard">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button component={Link} to="/faculty_member/courses">
+    <ListItem button component={Link} to="/admin/faculties">
+      <ListItemIcon>
+        <LibraryBooksIcon />
+      </ListItemIcon>
+      <ListItemText primary="Faculties" />
+    </ListItem>
+    <ListItem button>
       <ListItemIcon>
         <LibraryBooksIcon />
       </ListItemIcon>
       <ListItemText primary="Courses" />
-    </ListItem>
-    <ListItem button component={Link} to="/faculty_member/account">
-      <ListItemIcon>
-        <AccountCircleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Account" />
     </ListItem>
   </div>
 );

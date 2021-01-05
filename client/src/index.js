@@ -17,6 +17,7 @@ import FacultyMemberCourses from './pages/faculty_member/Courses';
 
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
+import AdminFaculties from './pages/admin/Faculties';
 
 
 
@@ -80,6 +81,9 @@ ReactDOM.render(
         </Route>
         <Route exact path="/admin/dashboard">
           {adminLoggedIn ? <AdminDashboard/> : <Redirect to="/admin/login" />}
+        </Route>
+        <Route exact path="/admin/faculties">
+          {adminLoggedIn ? <AdminFaculties/> : <Redirect to="/admin/login" />}
         </Route>
         
       </Switch>

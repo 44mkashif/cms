@@ -5,6 +5,7 @@ const Student = require("./../models").Student;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Faculty;
+const db = require('./../models');
 
 
 const create = (req, res) => {
@@ -164,7 +165,14 @@ const retrieveFacultyMembers = (req,res) => {
         }]
     })
     .then(facultyMembers => {
-        res.status(statusCodes.OK).json({success: true, data: facultyMembers});
+        if(!facultyMembers) {
+            res.status(statusCodes.NOT_FOUND).json({
+                success:true,
+                message: messages.ResourceNotFound
+            })
+        } else {
+            res.status(statusCodes.OK).json({success: true, data: facultyMembers});
+        }
     })
     .catch(err => {
         res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
@@ -182,7 +190,14 @@ const retrieveFacultyCourses = (req,res) => {
         }]
     })
     .then(courses => {
-        res.status(statusCodes.OK).json({success: true, data: courses});
+        if(!courses) {
+            res.status(statusCodes.NOT_FOUND).json({
+                success:true,
+                message: messages.ResourceNotFound
+            })
+        } else {
+            res.status(statusCodes.OK).json({success: true, data: courses});
+        }
     })
     .catch(err => {
         res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
@@ -200,11 +215,42 @@ const retrieveFacultyStudents = (req,res) => {
         }]
     })
     .then(students => {
-        res.status(statusCodes.OK).json({success: true, data: students});
+        if(!students) {
+            res.status(statusCodes.NOT_FOUND).json({
+                success:true,
+                message: messages.ResourceNotFound
+            })
+        } else {
+            res.status(statusCodes.OK).json({success: true, data: students});
+        }
     })
     .catch(err => {
         res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
     });  
+}
+
+const retrieveFacultyDean = (req,res) => {
+    const name = req.params.facultyId;  
+    
+    db.sequelize.query('SELECT `Faculty`.`name`, `Faculty`.`location`, `Faculty`.`dean_id`, `Faculty`.`contact_phone`, `Faculty`.`contact_email`, `Faculty`.`createdAt`, `Faculty`.`updatedAt`, `dean`.`id` AS `dean.id`, `dean`.`faculty_name` AS `dean.faculty_name`, `dean`.`name` AS `dean.name`, `dean`.`phone` AS `dean.phone`, `dean`.`email` AS `dean.email`, `dean`.`password` AS `dean.password`, `dean`.`dob` AS `dean.dob`, `dean`.`address` AS `dean.address`, `dean`.`designation` AS `dean.designation`, `dean`.`createdAt` AS `dean.createdAt`, `dean`.`updatedAt` AS `dean.updatedAt` FROM `Faculties` AS `Faculty` LEFT OUTER JOIN `Faculty_Members` AS `dean` ON `Faculty`.`dean_id` = `dean`.`id` WHERE `Faculty`.`name` = (:name)', {
+        replacements: {name: name},
+        type: db.sequelize.QueryTypes.SELECT,
+        nest: true
+    })
+    .then(facultyWithDean => {
+        console.log(facultyWithDean);
+        if(facultyWithDean.length == 0) {
+            res.status(statusCodes.NOT_FOUND).json({
+                success:true,
+                message: messages.ResourceNotFound
+            })
+        } else {
+            res.status(statusCodes.OK).json({success: true, data: facultyWithDean});
+        }
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });   
 }
 
 module.exports = {
@@ -215,5 +261,6 @@ module.exports = {
     destroy,
     retrieveFacultyMembers,
     retrieveFacultyCourses,
-    retrieveFacultyStudents
+    retrieveFacultyStudents,
+    retrieveFacultyDean
 }

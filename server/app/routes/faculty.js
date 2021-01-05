@@ -30,6 +30,8 @@ Router.post("/:facultyId/students/", CourseController.create);
 Router.put("/:facultyId/students/:id", CourseController.update);
 Router.delete("/:facultyId/students/:id", CourseController.destroy);
 
+Router.get("/:facultyId/dean/", FacultyController.retrieveFacultyDean);
+
 Router.all('/', methodNotAllowed);
 Router.all('/:id', methodNotAllowed);
 

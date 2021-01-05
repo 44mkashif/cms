@@ -10,15 +10,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems } from './listItems';
+import FacultyList from './FacultyList';
+import Logout from './../Logout';
 
 function Copyright() {
   return (
@@ -110,11 +110,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 40,
   },
 }));
 
-export default function CourseRegistration() {
+export default function Faculties() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -140,9 +140,9 @@ export default function CourseRegistration() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Course Registration
+          Faculties
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
           </IconButton>
         </Toolbar>
@@ -162,12 +162,15 @@ export default function CourseRegistration() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          
+            <Grid item xs={12}>
+              <FacultyList />
+            </Grid>
+            <Box className={classes.fixedHeight}></Box>
           <Box pt={4}>
             <Copyright />
           </Box>
