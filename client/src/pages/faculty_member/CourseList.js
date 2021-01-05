@@ -126,7 +126,11 @@ export default function CourseList() {
         <br></br>
       </Paper>
       <Box className={classes.fixedHeight}></Box>
-      {!isSelected ? <div>Please select a course to check the details</div>
+      {!isSelected 
+        ? 
+        <div>
+          <Typography component="h2" color="primary" gutterBottom>Please select a Faculty to check the details</Typography>
+        </div>
         :
         <div>
           <Paper className={classes.paper}>

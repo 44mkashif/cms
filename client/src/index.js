@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import 'fontsource-roboto';
 
 import StudentLogin from './pages/student/Login';
 import StudentDashboard from './pages/student/Dashboard';
@@ -19,9 +21,33 @@ import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminFaculties from './pages/admin/Faculties';
 
-
-
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { dark } from '@material-ui/core/styles/createPalette';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#33ab9f',
+      main: '#009688',
+      dark: '#00695f',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#4aedc4',
+      main: '#1de9b6',
+      dark: '#14a37f',
+      contrastText: '#000',
+    },
+    error: {
+      light: '#f6685e',
+      main: '#f44336',
+      dark: '#aa2e25',
+      contrastText: '#fff',
+    },
+    type: 'light'
+  },
+  fontFamily: 'fontsource-roboto' // as an aside, highly recommend importing roboto font for Material UI projects! Looks really nice
+});
 
 var studentLoggedIn = false;
 var facultyMemberLoggedIn = false;
@@ -37,7 +63,8 @@ if (localStorage.isLoggedIn) {
 };
 
 ReactDOM.render(
-  <BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
       <Switch>
         <Route exact path="/"><App/></Route>
 
@@ -87,7 +114,8 @@ ReactDOM.render(
         </Route>
         
       </Switch>
-  </BrowserRouter>, 
+    </BrowserRouter>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
