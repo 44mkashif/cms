@@ -127,7 +127,7 @@ export default function ResultCards() {
     <div>
         {results.map((result, index) => (
             <div>
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper} elevation={6}>
                     <Typography component="h2" variant="h6" color="primary" gutterBottom>{result.semester + " Semester, " + enrollments[0].academic_year}</Typography>
                     <Table size="small">
                         <TableHead>

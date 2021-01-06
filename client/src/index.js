@@ -20,9 +20,11 @@ import FacultyMemberCourses from './pages/faculty_member/Courses';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminFaculties from './pages/admin/Faculties';
+import AdminAddFaculty from './pages/admin/AddFaculty';
+import AdminFacultyMembers from './pages/admin/FacultyMembers';
+import AdminAddFacultyMember from './pages/admin/AddFacultyMember';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { dark } from '@material-ui/core/styles/createPalette';
 
 const theme = createMuiTheme({
   palette: {
@@ -111,6 +113,15 @@ ReactDOM.render(
         </Route>
         <Route exact path="/admin/faculties">
           {adminLoggedIn ? <AdminFaculties/> : <Redirect to="/admin/login" />}
+        </Route>
+        <Route exact path="/admin/add_faculty">
+          {adminLoggedIn ? <AdminAddFaculty/> : <Redirect to="/admin/login" />}
+        </Route>
+        <Route exact path="/admin/faculty_members">
+          {adminLoggedIn ? <AdminFacultyMembers/> : <Redirect to="/admin/login" />}
+        </Route>
+        <Route exact path="/admin/add_faculty_member">
+          {adminLoggedIn ? <AdminAddFacultyMember/> : <Redirect to="/admin/login" />}
         </Route>
         
       </Switch>

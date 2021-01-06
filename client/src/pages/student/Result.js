@@ -16,8 +16,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { mainListItems, secondaryListItems } from './listItems';
-import ResultCards from './ResultCards';
+import { mainListItems, secondaryListItems } from './Containers/listItems';
+import ResultCards from './Containers/ResultCards';
 import Logout from '../Logout';
 
 

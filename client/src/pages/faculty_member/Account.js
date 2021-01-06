@@ -16,8 +16,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { mainListItems } from './listItems';
-import AccountDetails from './AccountDetails';
+import { mainListItems } from './Containers/listItems';
+import AccountDetails from './Containers/AccountDetails';
 import Logout from '../Logout';
 
 function Copyright() {

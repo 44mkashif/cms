@@ -127,7 +127,7 @@ export default function CourseList() {
 
   return (
     <React.Fragment>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={6}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>Courses</Typography>
         <Table size="small">
           <TableHead>
@@ -168,7 +168,7 @@ export default function CourseList() {
         </div>
         :
         <div>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={6}>
             <Typography component="h2" variant="h6" color="primary" gutterBottom>{courses[getIndex(courseSelected)].name}</Typography>
             <br></br>
             <Table size="small">

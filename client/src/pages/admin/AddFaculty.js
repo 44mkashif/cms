@@ -12,12 +12,13 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { mainListItems, secondaryListItems } from './listItems';
-import CourseList from './CourseList';
+import { mainListItems, secondaryListItems } from './Containers/listItems';
+import FacultyForm from './Containers/FacultyForm';
 import Logout from './../Logout';
 
 function Copyright() {
@@ -110,11 +111,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 40,
+    height: 240,
   },
 }));
 
-export default function Courses() {
+export default function AddFaculty() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -140,7 +141,7 @@ export default function Courses() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Courses
+            Add Faculty
           </Typography>
           <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
@@ -167,10 +168,14 @@ export default function Courses() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
-              <CourseList />
+              {/* <AccountDetails /> */}
             </Grid>
-            <Box className={classes.fixedHeight}></Box>
+            <Grid item xs={12}>
+              <FacultyForm />
+            </Grid>
+          </Grid>
           <Box pt={4}>
             <Copyright />
           </Box>

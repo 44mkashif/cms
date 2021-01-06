@@ -18,8 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './Containers/listItems';
-import CourseList from './Containers/CourseList';
-import AccountDetails from './Containers/AccountDetails';
+import FacultyMemberForm from './Containers/FacultyMemberForm';
 import Logout from './../Logout';
 
 function Copyright() {
@@ -116,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function AddFaculty() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -142,7 +141,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Add Faculty
           </Typography>
           <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
@@ -171,10 +170,10 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <AccountDetails />
+              {/* <AccountDetails /> */}
             </Grid>
             <Grid item xs={12}>
-              <CourseList />
+              <FacultyMemberForm />
             </Grid>
           </Grid>
           <Box pt={4}>

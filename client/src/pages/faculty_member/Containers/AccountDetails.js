@@ -67,7 +67,7 @@ export default function AccountDetails() {
     {loading ? <div>Loading...</div>
     :
     <div>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={6}>
             <Typography component="h2" variant="h6" color="primary" gutterBottom>{faculty_member.name}</Typography>
             <Table size="small">
                 <TableBody>
