@@ -23,6 +23,8 @@ import AdminFaculties from './pages/admin/Faculties';
 import AdminAddFaculty from './pages/admin/AddFaculty';
 import AdminFacultyMembers from './pages/admin/FacultyMembers';
 import AdminAddFacultyMember from './pages/admin/AddFacultyMember';
+import AdminStudents from './pages/admin/Students';
+import AdminAddStudent from './pages/admin/AddStudent';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
@@ -122,6 +124,12 @@ ReactDOM.render(
         </Route>
         <Route exact path="/admin/add_faculty_member">
           {adminLoggedIn ? <AdminAddFacultyMember/> : <Redirect to="/admin/login" />}
+        </Route>
+        <Route exact path="/admin/students">
+          {adminLoggedIn ? <AdminStudents/> : <Redirect to="/admin/login" />}
+        </Route>
+        <Route exact path="/admin/add_student">
+          {adminLoggedIn ? <AdminAddStudent/> : <Redirect to="/admin/login" />}
         </Route>
         
       </Switch>

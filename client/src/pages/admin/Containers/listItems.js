@@ -29,6 +29,12 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Faculty Members" />
     </ListItem>
+    <ListItem button component={Link} to="/admin/students">
+      <ListItemIcon>
+        <PersonIcon />
+      </ListItemIcon>
+      <ListItemText primary="Students" />
+    </ListItem>
   </div>
 );
 
@@ -46,6 +52,12 @@ export const secondaryListItems = (
         <PersonAddIcon />
       </ListItemIcon>
       <ListItemText primary="Add Faculty Member" />
+    </ListItem>
+    <ListItem button component={Link} to="/admin/add_student">
+      <ListItemIcon>
+        <PersonAddIcon />
+      </ListItemIcon>
+      <ListItemText primary="Add Student" />
     </ListItem>
   </div>
 );

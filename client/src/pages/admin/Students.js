@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './Containers/listItems';
-import FacultyMemberList from './Containers/FacultyMemberList';
+import StudentList from './Containers/StudentList';
 import Logout from '../Logout';
 
 function Copyright() {
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FacultyMembers() {
+export default function Students() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -140,7 +140,7 @@ export default function FacultyMembers() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-          Faculty Members
+          Students
           </Typography>
           <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
@@ -168,7 +168,7 @@ export default function FacultyMembers() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
             <Grid item xs={12}>
-              <FacultyMemberList />
+              <StudentList />
             </Grid>
             <Box className={classes.fixedHeight}></Box>
           <Box pt={4}>
