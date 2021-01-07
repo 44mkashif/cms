@@ -12,14 +12,12 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './Containers/listItems';
-import CourseList from './Containers/CourseList';
-import AccountDetails from './Containers/AccountDetails';
+import Attendance from './Containers/Attendance';
 import Logout from './../Logout';
 
 function Copyright() {
@@ -112,11 +110,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 40,
   },
 }));
 
-export default function Dashboard() {
+export default function Courses() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -142,7 +140,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Upload Attendance
           </Typography>
           <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
@@ -169,14 +167,10 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
             <Grid item xs={12}>
-              <AccountDetails />
+              <Attendance />
             </Grid>
-            <Grid item xs={12}>
-              <CourseList />
-            </Grid>
-          </Grid>
+            <Box className={classes.fixedHeight}></Box>
           <Box pt={4}>
             <Copyright />
           </Box>

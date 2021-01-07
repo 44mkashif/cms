@@ -16,7 +16,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { mainListItems } from './Containers/listItems';
+import { mainListItems, secondaryListItems } from './Containers/listItems';
 import CourseList from './Containers/CourseList';
 import Logout from './../Logout';
 
@@ -162,7 +162,7 @@ export default function Courses() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
+        <List>{secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

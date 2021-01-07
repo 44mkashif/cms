@@ -10,7 +10,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import PostAddIcon from '@material-ui/icons/PostAdd';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 
@@ -51,14 +51,14 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    {/* <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
+    {/* <ListSubheader inset>Saved reports</ListSubheader> */}
+    <ListItem button component={Link} to="/student/register_course">
       <ListItemIcon>
-        <AssignmentIcon />
+        <LibraryAddIcon />
       </ListItemIcon>
-      <ListItemText primary="Current month" />
+      <ListItemText primary="Course Registration" />
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>

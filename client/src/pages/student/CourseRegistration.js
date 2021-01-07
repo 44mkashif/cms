@@ -19,6 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './Containers/listItems';
+import RegisterCourses from './Containers/RegisterCourses';
+import Logout from './../Logout';
 
 function Copyright() {
   return (
@@ -142,7 +144,7 @@ export default function CourseRegistration() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Course Registration
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick = {() => { Logout() }}>
             <ExitToAppIcon />
           </IconButton>
         </Toolbar>
@@ -167,7 +169,10 @@ export default function CourseRegistration() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          
+          <Grid item xs={12}>
+              <RegisterCourses />
+            </Grid>
+            <Box className={classes.fixedHeight}></Box>
           <Box pt={4}>
             <Copyright />
           </Box>

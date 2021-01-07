@@ -13,6 +13,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export const mainListItems = (
   <div>
@@ -33,6 +34,18 @@ export const mainListItems = (
         <AccountCircleIcon />
       </ListItemIcon>
       <ListItemText primary="Account" />
+    </ListItem>
+  </div>
+);
+
+export const secondaryListItems = (
+  <div>
+    {/* <ListSubheader inset>Saved reports</ListSubheader> */}
+    <ListItem button component={Link} to="/faculty_member/upload_attendance">
+      <ListItemIcon>
+        <AddCircleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Upload Attendance" />
     </ListItem>
   </div>
 );

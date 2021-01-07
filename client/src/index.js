@@ -16,6 +16,7 @@ import FacultyMemberLogin from './pages/faculty_member/Login';
 import FacultyMemberDashboard from './pages/faculty_member/Dashboard';
 import FacultyMemberAccount from './pages/faculty_member/Account';
 import FacultyMemberCourses from './pages/faculty_member/Courses';
+import FacultyMemberUploadAttendance from './pages/faculty_member/UploadAttendance';
 
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
@@ -91,6 +92,9 @@ ReactDOM.render(
         <Route exact path="/student/account">
           {studentLoggedIn ? <StudentAccount/> : <Redirect to="/student/login" />}
         </Route>
+        <Route exact path="/student/register_course">
+          {studentLoggedIn ? <StudentCourseRegistration/> : <Redirect to="/student/login" />}
+        </Route>
 
         {/* Faculty Member routes */}
         <Route exact path="/faculty_member/login">
@@ -104,6 +108,9 @@ ReactDOM.render(
         </Route>
         <Route exact path="/faculty_member/account">
           {facultyMemberLoggedIn ? <FacultyMemberAccount/> : <Redirect to="/faculty_member/login" />}
+        </Route>
+        <Route exact path="/faculty_member/upload_attendance">
+          {facultyMemberLoggedIn ? <FacultyMemberUploadAttendance/> : <Redirect to="/faculty_member/login" />}
         </Route>
 
         {/* Admin Routes */}
