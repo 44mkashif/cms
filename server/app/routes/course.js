@@ -16,6 +16,8 @@ Router.post("/:course_code/sections/", SectionController.create);
 Router.put("/:course_code/sections/:id", SectionController.update);
 Router.delete("/:course_code/sections/:id", SectionController.destroy);
 
+Router.get("/:course_code/students/", CourseController.retrieveCourseStudents);
+
 Router.all('/', methodNotAllowed);
 Router.all('/:id', methodNotAllowed);
 

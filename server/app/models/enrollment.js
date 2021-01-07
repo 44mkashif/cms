@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
   Enrollment.associate = (models) => {
     // define association here
     Enrollment.belongsTo(models.Student, {
-      foreignKey: 'reg_no'
+      foreignKey: 'reg_no',
+      as: 'student'
     });
     Enrollment.belongsTo(models.Section, {
       foreignKey: 'section_id',

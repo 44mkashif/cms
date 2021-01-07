@@ -1,5 +1,7 @@
 const Course = require("./../models").Course;
 const Section = require("./../models").Section;
+const Enrollment = require("./../models").Enrollment;
+const Student = require("./../models").Student;
 const statusCodes = require("./../constants/statusCodes");
 const messages = require("./../constants/messages");
 const validate = require("./../validation").Course;
@@ -168,11 +170,38 @@ const retrieveCourseSections = (req,res) => {
     });  
 }
 
+const retrieveCourseStudents = (req,res) => {
+    const course_code = req.params.course_code;  
+    // console.log(`Id = ${id}`);  
+    Course
+    .findByPk(course_code,{
+        include: [{
+            model: Section,
+            as: "sections",
+            include: [{
+                model: Enrollment,
+                as: "enrollments",
+                include: [{
+                    model: Student,
+                    as: "student"
+                }]
+            }]
+        }]
+    })
+    .then(sections => {
+        res.status(statusCodes.OK).json({success: true, data: sections});
+    })
+    .catch(err => {
+        res.status(statusCodes.BAD_REQUEST).json({success: false, err: err});
+    });  
+}
+
 module.exports = {
     create,
     retrieve,
     list,
     update,
     destroy,
-    retrieveCourseSections
+    retrieveCourseSections,
+    retrieveCourseStudents
 }
