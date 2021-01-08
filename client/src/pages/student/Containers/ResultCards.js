@@ -75,6 +75,15 @@ export default function ResultCards() {
                 enrollments = response.data.data.enrollments;
                 console.log(enrollments);
 
+                for (var i = 0; i < enrollments.length; i++) {
+                  var enrollment = enrollments[i];
+
+                  if (!enrollment.grade) {
+                    console.log('grade');
+                    enrollments.splice(i, 1);
+                    i--;
+                  }
+                }
                 let requests = [];
                 enrollments.forEach(enrollment => {
                     requests.push(retrieveCourse(enrollment.id));
@@ -142,12 +151,12 @@ export default function ResultCards() {
                         :
                         <TableBody>
                             {enrollments.map((enrollment, index) => (
-                                <StyledTableRow key={1}>
-                                    <StyledTableCell align="center">{courses[index].course_code}</StyledTableCell>
-                                    <StyledTableCell align="center">{courses[index].name}</StyledTableCell>
-                                    <StyledTableCell align="center">{courses[index].credit_hours}</StyledTableCell>
-                                    <StyledTableCell align="center">{enrollment.grade}</StyledTableCell>
-                                </StyledTableRow>
+                              <StyledTableRow key={enrollment.id}>
+                                <StyledTableCell align="center">{courses[index].course_code}</StyledTableCell>
+                                <StyledTableCell align="center">{courses[index].name}</StyledTableCell>
+                                <StyledTableCell align="center">{courses[index].credit_hours}</StyledTableCell>
+                                <StyledTableCell align="center">{enrollment.grade}</StyledTableCell>
+                              </StyledTableRow>
                             ))}
                         </TableBody>
                         }
